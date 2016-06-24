@@ -1,0 +1,7 @@
+/composer.lock
+# Created by .ignore support plugin (hsz.mobi)
+### Composer template
+composer.phar
+vendor/
+
+.idea/
