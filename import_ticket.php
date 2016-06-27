@@ -12,26 +12,29 @@ require_once "ConvertCsvToArray.php";
 //fichier source
 $file = "tickets_appels_201202.csv";
 
+// creation d'un oubjet qui va convertir le csv en array
 $csvArray = new ConvertCsvToArray();
-$data = $csvArray->conv($file);
+$data = $csvArray->convert($file);
 
-
+//premiere boucle sur les morceaux du tableau $data 
 foreach(array_chunk($data, 100) as $datas ) {
 
+    // crée un ticket pour chaque ligne du tableau
     foreach($datas as $arr) {
 
-        echo ">";
-        $product = new TicketsAppels();
-        $product->setCompteID($arr[0]);
-        $product->setFactureID($arr[1]);
-        $product->setAbonneID($arr[2]);
-        $product->setAppelDatetime((new \DateTime($arr[3])));
-        $product->setAppelDureeFact($arr[4]);
-        $product->setAppelDureeReel($arr[5]);
-        $product->setAppelType($arr[6]);
+        $ticket = new TicketsAppels();
+        $ticket->setCompteID($arr[0]);
+        $ticket->setFactureID($arr[1]);
+        $ticket->setAbonneID($arr[2]);
+        $ticket->setAppelDatetime((new \DateTime($arr[3])));
+        $ticket->setAppelDureeFact($arr[4]);
+        $ticket->setAppelDureeReel($arr[5]);
+        $ticket->setAppelType($arr[6]);
 
-        $entityManager->persist($product);
+        $entityManager->persist($ticket);
     }
-    echo "-";
 }
+
 $entityManager->flush();
+
+echo "importation fini";

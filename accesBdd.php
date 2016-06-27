@@ -6,6 +6,10 @@
  * Date: 26/06/2016
  * Time: 18:00
  */
+
+require_once "bootstrap.php";
+
+// permet de créer un objet pour se connecter à la base de donnée et faire des requetes
 class accesBdd extends PDO
 {
 

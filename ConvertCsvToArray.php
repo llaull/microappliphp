@@ -9,30 +9,12 @@ ini_set('memory_limit', '1024M');
  */
 class ConvertCsvToArray
 {
-
-    public function convert($filename, $delimiter = ';')
-    {
-        if (!file_exists($filename) || !is_readable($filename)) {
-            return FALSE;
-        }
-
-        $header = NULL;
-        $data = array();
-
-        if (($handle = fopen($filename, 'r')) !== FALSE) {
-            while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE) {
-                if (!$header) {
-                    $header = $row;
-                } else {
-                    $data[] = array_combine($header, $row);
-                }
-            }
-            fclose($handle);
-        }
-        return $data;
-    }
-
-    public function conv($filename)
+    /**
+     * prend un fichier csv pour le convertir en tableau PHP
+     * @param $filename
+     * @return array
+     */
+    public function convert($filename)
     {
         if (($handle = fopen($filename, "r")) !== FALSE) {
             fgetcsv($handle, 1000, ";");
@@ -41,6 +23,8 @@ class ConvertCsvToArray
 
             while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
 
+                // si la ligne n'est pas vide
+                // que que la premiere colonne est un nombre
                 if (($data[0] != "") AND (is_numeric($data[0]))) {
 
                     $compte_ID = $data[0];
