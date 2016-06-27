@@ -1,17 +1,9 @@
 <?php
-use Doctrine\ORM\Tools\Console\ConsoleRunner;
+// cli-config.php
+require_once "bootstrap.php";
 
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
+$helperSet = new \Symfony\Component\Console\Helper\HelperSet(array(
+    'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($entityManager)
+));
 
-// replace with file to your own project bootstrap
-require_once 'bootstrap.php';
-
-
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
-
-
-// replace with mechanism to retrieve EntityManager in your app
-//$entityManager = GetEntityManager();
-
-//return ConsoleRunner::createHelperSet($entityManager);
+return $helperSet;

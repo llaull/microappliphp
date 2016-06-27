@@ -1,21 +1,23 @@
 <?php
-// bootstrap.php
 use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 
 require_once "vendor/autoload.php";
 
-// Create a simple "default" Doctrine ORM configuration for Annotations
+$classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', '/path/to/extensions');
+$classLoader->register();
+
+// Create a simple "default" Doctrine ORM configuration for XML Mapping
 $isDevMode = true;
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode);
+// or if you prefer yaml or annotations
 
 // database configuration parameters
 $conn = array(
-	'driver'   => 'pdo_mysql',
-    'user'     => 'root',
+    'driver' => 'pdo_mysql',
+    'user' => 'root',
     'password' => '',
-    'dbname'   => 'test',
+    'dbname' => 'gac_technology_eval',
 );
 
 // obtaining the entity manager
-$entityManager = EntityManager::create($conn, $config);
+$entityManager = \Doctrine\ORM\EntityManager::create($conn, $config);

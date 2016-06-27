@@ -1,10 +1,10 @@
 {
     "require": {
-        "doctrine/orm": "*"
+        "doctrine/orm": "2.*"
     },
     "autoload": {
-        "psr-4" : {"" : "src",
-            "App\\" : "src/App/"
+        "psr-0": {
+            "": "src/"
         }
     }
 }
