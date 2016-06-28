@@ -8,10 +8,11 @@
 
 require_once "bootstrap.php";
 
+//Retrouve la quantité totale de SMS envoyés par l'ensemble des abonnés
 $qb = $entityManager->createQueryBuilder();
-$qb->select('t')
+$qb->select('count(t.id)')
     ->from('TicketsAppels', 't')
     ->where('t.appel_type LIKE :type')
     ->setParameters(array('type' => "%envoi%sms%"));
 
-echo count($qb->getQuery()->getArrayResult()) ."envoyer";
+$totalSms = $qb->getQuery()->getSingleScalarResult();

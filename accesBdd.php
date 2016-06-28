@@ -7,7 +7,6 @@
  * Time: 18:00
  */
 
-require_once "bootstrap.php";
 
 // permet de créer un objet pour se connecter à la base de donnée et faire des requetes
 class accesBdd extends PDO
@@ -20,7 +19,6 @@ class accesBdd extends PDO
             throw new Exception('Impossible d\'instancier 2 fois !');
         }
         try {
-            //parent::__construct('mysql:host=localhost;dbname=cityzebook', 'root', '', array(1002 => "SET NAMES 'UTF8'"));
             parent::__construct('mysql:host=localhost;dbname=gac_technology_eval', 'root', '', array(1002 => "SET NAMES 'UTF8'"));
             self::$instance = $this;
         } catch(Exception $e) {

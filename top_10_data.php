@@ -9,8 +9,8 @@
 require_once "accesBdd.php";
 
 /**
- * Retrouver le TOP 10 des volumes data facturés en dehors de la tranche horaire 8h00 18h00, par abonné.
- * @return un tableau avec la reponse de la requete
+ * Retrouve le TOP 10 des volumes data facturés en dehors de la tranche horaire 8h00 18h00, par abonné.
+ * @return un tableau avec la réponse de la requête
  */
 function getTopData()
 {
@@ -23,34 +23,8 @@ function getTopData()
               LIMIT 10";
 
     $req = accesBdd::getDb()->prepare($stringRQ);
-
     $req->execute();
     $rows = $req->fetchAll();
 
     return $rows;
 }
-
-//initialise la valeur i à 1 pour afficher les positions des abonnés
-$i = 1;
-?>
-
-<table border="1" cellspacing="0">
-    <thead>
-    <tr>
-        <th>Position</th>
-        <th>appel_datetime</th>
-        <th>abonne_ID</th>
-        <th>appel_duree_fact</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach (getTopData() as $v) : ?>
-        <tr>
-            <td> <?php echo $i++; ?> </td>
-            <td> <?php echo $v['appel_datetime']; ?> </td>
-            <td> <?php echo $v['abonne_ID']; ?> </td>
-            <td> <?php echo $v['appel_duree_fact']; ?> </td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
