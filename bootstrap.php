@@ -9,7 +9,6 @@ $classLoader->register();
 // Create a simple "default" Doctrine ORM configuration for XML Mapping
 $isDevMode = true;
 $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src"), $isDevMode);
-// or if you prefer yaml or annotations
 
 // database configuration parameters
 $conn = array(
